@@ -15,14 +15,11 @@ class MboxLoader(BaseLoader):
         self,
         file_path: Union[str, Path]
     ):
-        """
-        Initializes the JSONLoader with a file path, an optional content key to extract specific content,
-        and an optional metadata function to extract metadata from each record.
-        """
+        
         self.file_path = Path(file_path).resolve()
 
     def load(self) -> List[Document]:
-        """Load and return documents from the JSON file."""
+        """Load and return documents from the Mbox file."""
         docs: List[Document] = []
         docs.extend(MboxFileReader().load_data(self.file_path))
         return [doc.to_langchain_format() for doc in docs]
@@ -32,10 +29,7 @@ class MarkDownLoader(BaseLoader):
         self,
         file_path: Union[str, Path]
     ):
-        """
-        Initializes the JSONLoader with a file path, an optional content key to extract specific content,
-        and an optional metadata function to extract metadata from each record.
-        """
+        
         self.headers_to_split_on = [
             ("#", "Header 1"),
             ("##", "Header 2"),
@@ -45,7 +39,7 @@ class MarkDownLoader(BaseLoader):
         self.file_path = Path(file_path).resolve()
 
     def load(self) -> List[Document]:
-        """Load and return documents from the JSON file."""
+        """Load and return documents from the Markdown file."""
         docs: List[Document] = []
 
         with open(self.file_path, encoding="utf-8") as file:
