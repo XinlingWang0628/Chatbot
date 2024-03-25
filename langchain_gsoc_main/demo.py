@@ -143,11 +143,11 @@ if __name__ == '__main__':
             # get answer from the chain
             ans = chain.invoke(question)
             return ans
-    print("---- Answer ----")
+    #print("---- Answer ----")
     #print(ans)
 
     
-
+    # User Interface
     def predict(message, history):
         history_langchain_format = []
         for human, ai in history:
@@ -157,7 +157,7 @@ if __name__ == '__main__':
         gpt_response = getAnswer(message)
         return gpt_response
 
-    chatbot = gr.Chatbot(
+    chatbot = gr.Chatbot( #uploaded image of user and cBioportal as indicator 
         [],
         elem_id="chatbot",
         bubble_full_width=False,
